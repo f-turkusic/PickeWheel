@@ -65,9 +65,16 @@ var arcs = vis.selectAll("g.slice")
     .append("g")
     .attr("class", "slice");
 
+// arcs.append("path")
+//     .attr("fill", function (d, i) { return color(i); })
+//     .attr("d", function (d) { return arc(d); });
+
+// Change the line below to set all slices to yellow
 arcs.append("path")
-    .attr("fill", function (d, i) { return color(i); })
+    .attr("fill", "#fcc203") // Set the fill color to yellow
     .attr("d", function (d) { return arc(d); });
+
+
 // add the text
 arcs.append("text").attr("transform", function (d)
 {
@@ -79,7 +86,7 @@ arcs.append("text").attr("transform", function (d)
     .attr("text-anchor", "end")
     .text(function (d, i)
     {
-        return "?";
+        return data[i].value;
     });
 container.on("click", spin);
 function spin(d)

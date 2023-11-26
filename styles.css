@@ -147,3 +147,16 @@ section.active .modal-box {
     padding: 6px 12px;
     margin: 0 10px;
 }
+
+section {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-image: url('pictures/13.png');
+    /* Adjust the path as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    /* Ensures that the background doesn't overflow */
+}
