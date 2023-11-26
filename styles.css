@@ -55,13 +55,13 @@ button {
     color: #fff;
     padding: 14px 22px;
     border: none;
-    background: #4070f4;
+    background: #fcc203;
     border-radius: 6px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #265df2;
+    background-color: #fcc203;
 }
 
 button.show-modal,
@@ -75,7 +75,7 @@ button.show-modal,
     color: #fff;
     padding: 14px 22px;
     border: none;
-    background: #4070f4;
+    background: #fcc203;
     border-radius: 6px;
     cursor: pointer;
 }

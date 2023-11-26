@@ -89,9 +89,32 @@ arcs.append("text").attr("transform", function (d)
         return data[i].value;
     });
 container.on("click", spin);
+
+var showModal = function (question)
+{
+    var modal = document.getElementById("myModal");
+    var modalQuestion = document.getElementById("modalQuestion");
+    modalQuestion.innerText = question;
+    modal.style.display = "block";
+};
+
+var closeModal = function ()
+{
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+};
+
+var buttonClicked = true;
+
+
 function spin(d)
 {
-
+    if (!buttonClicked)
+    {
+        // If the button is not clicked, disable spinning
+        console.log("Disable");
+        return;
+    }
     container.on("click", null);
     //all slices have been seen, all done
     console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
@@ -136,12 +159,13 @@ function spin(d)
             oldrotation = rotation;
 
 
-
             /* Get the result value from object "data" */
             console.log(data[picked].label)
 
             /* Comment the below line for restrict spin to sngle time */
             container.on("click", spin);
+
+            buttonClicked = false;
         });
 }
 //make arrow
@@ -192,4 +216,10 @@ function getRandomNumbers()
         }
     }
     return array;
-} 
+}
+
+function enableSpining()
+{
+    showBtn = document.querySelector(".show-modal");
+    showBtn.addEventListener("click", () => { buttonClicked = false; });
+}
