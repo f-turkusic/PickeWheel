@@ -6,41 +6,15 @@ var padding = { top: 20, right: 40, bottom: 0, left: 0 },
     oldrotation = 0,
     picked = 100000,
     oldpick = [],
-    color = d3.scale.category20();//category20c()
-//randomNumbers = getRandomNumbers();
-//http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
-// var data = [
-//     { "label": "Dell LAPTOP", "value": 1, "question": "What CSS property is used for specifying the area between the content and its border?" }, // padding
-//     { "label": "IMAC PRO", "value": 2, "question": "What CSS property is used for changing the font?" }, //font-family
-//     { "label": "SUZUKI", "value": 3, "question": "What CSS property is used for changing the color of text?" }, //color
-//     { "label": "HONDA", "value": 4, "question": "What CSS property is used for changing the boldness of text?" }, //font-weight
-//     { "label": "FERRARI", "value": 5, "question": "What CSS property is used for changing the size of text?" }, //font-size
-//     { "label": "APARTMENT", "value": 6, "question": "What CSS property is used for changing the background color of a box?" }, //background-color
-//     { "label": "IPAD PRO", "value": 7, "question": "Which word is used for specifying an HTML tag that is inside another tag?" }, //nesting
-//     { "label": "LAND", "value": 8, "question": "Which side of the box is the third number in: margin:1px 1px 1px 1px; ?" }, //bottom
-//     { "label": "MOTOROLLA", "value": 9, "question": "What are the fonts that don't have serifs at the ends of letters called?" }, //sans-serif
-//     { "label": "BMW", "value": 10, "question": "With CSS selectors, what character prefix should one use to specify a class?" }
-// ];
+    color = d3.scale.category20();
 
 var data = [
-    { "label": "Faruk", "value": 1, "question": "What CSS property is used for specifying the area between the content and its border?" }, // padding
-    { "label": "Alma", "value": 2, "question": "What CSS property is used for changing the font?" }, //font-family
-    { "label": "SUZUKI", "value": 3, "question": "What CSS property is used for changing the color of text?" }, //color
-    { "label": "HONDA", "value": 4, "question": "What CSS property is used for changing the boldness of text?" }, //font-weight
-    { "label": "FERRARI", "value": 5, "question": "What CSS property is used for changing the size of text?" }, //font-size
-    { "label": "APARTMENT", "value": 6, "question": "What CSS property is used for changing the background color of a box?" }, //background-color
-    { "label": "Faruk", "value": 7, "question": "What CSS property is used for specifying the area between the content and its border?" }, // padding
-    { "label": "Alma", "value": 8, "question": "What CSS property is used for changing the font?" }, //font-family
-    { "label": "SUZUKI", "value": 9, "question": "What CSS property is used for changing the color of text?" }, //color
-    { "label": "HONDA", "value": 10, "question": "What CSS property is used for changing the boldness of text?" }, //font-weight
-    { "label": "FERRARI", "value": 11, "question": "What CSS property is used for changing the size of text?" }, //font-size
-    { "label": "APARTMENT", "value": 12, "question": "What CSS property is used for changing the background color of a box?" }, //background-color
-    { "label": "Faruk", "value": 1, "question": "What CSS property is used for specifying the area between the content and its border?" }, // padding
-    { "label": "Alma", "value": 2, "question": "What CSS property is used for changing the font?" }, //font-family
-    { "label": "SUZUKI", "value": 3, "question": "What CSS property is used for changing the color of text?" }, //color
-    { "label": "HONDA", "value": 4, "question": "What CSS property is used for changing the boldness of text?" }, //font-weight
-    { "label": "FERRARI", "value": 5, "question": "What CSS property is used for changing the size of text?" }, //font-size
-    { "label": "APARTMENT", "value": 6, "question": "What CSS property is used for changing the background color of a box?" }, //background-color
+    { "label": "Faruk" },
+    { "label": "Alma" },
+    { "label": "SUZUKI" },
+    { "label": "HONDA" },
+    { "label": "FERRARI" },
+    { "label": "APARTMENT" },
 
 ];
 
@@ -86,7 +60,7 @@ arcs.append("text").attr("transform", function (d)
     .attr("text-anchor", "end")
     .text(function (d, i)
     {
-        return data[i].value;
+        return "?";
     });
 container.on("click", spin);
 
@@ -104,8 +78,38 @@ var closeModal = function ()
     modal.style.display = "none";
 };
 
-var buttonClicked = true;
+// Function to save selected names to a file
+function saveToFile(names)
+{
+    const fileSystem = window.webkitRequestFileSystem || window.requestFileSystem;
 
+    fileSystem(window.TEMPORARY, 5 * 1024 * 1024, function (fs)
+    {
+        fs.root.getFile('data/names.txt', { create: true }, function (fileEntry)
+        {
+            fileEntry.createWriter(function (fileWriter)
+            {
+                fileWriter.seek(fileWriter.length); // Move the file pointer to the end
+
+                const blob = new Blob([names.join('\n')], { type: 'text/plain' });
+
+                blob.arrayBuffer().then(function (buffer)
+                {
+                    const view = new Uint8Array(buffer);
+                    fileWriter.write(view);
+                });
+            }, errorHandler);
+        }, errorHandler);
+    }, errorHandler);
+}
+
+function errorHandler(error)
+{
+    console.error('File system error:', error);
+}
+
+
+var buttonClicked = true;
 
 function spin(d)
 {
@@ -166,6 +170,9 @@ function spin(d)
             container.on("click", spin);
 
             buttonClicked = false;
+
+            // Save the selected name to localStorage
+            saveToLocalStorage(data[picked].label);
         });
 }
 //make arrow
@@ -222,4 +229,21 @@ function enableSpining()
 {
     showBtn = document.querySelector(".show-modal");
     showBtn.addEventListener("click", () => { buttonClicked = false; });
+}
+
+
+// Function to save selected names to localStorage
+function saveToLocalStorage(name)
+{
+    // Retrieve existing names from localStorage
+    const storedNames = localStorage.getItem('selectedNames');
+
+    // Parse existing names or initialize an empty array
+    const namesArray = storedNames ? JSON.parse(storedNames) : [];
+
+    // Add the new name
+    namesArray.push(name);
+
+    // Save the updated array back to localStorage
+    localStorage.setItem('selectedNames', JSON.stringify(namesArray));
 }
