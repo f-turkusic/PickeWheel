@@ -119,6 +119,9 @@ function spin(d)
         console.log("Disable");
         return;
     }
+    // Play the spin sound
+    document.getElementById('spinSound').play();
+
     container.on("click", null);
     //all slices have been seen, all done
     console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
@@ -166,10 +169,16 @@ function spin(d)
             /* Get the result value from object "data" */
             console.log(data[picked].label)
 
+
+
             /* Comment the below line for restrict spin to sngle time */
             container.on("click", spin);
 
             buttonClicked = false;
+
+            // Play the spin sound
+            var sound = document.getElementById('spinSound');
+            sound.pause();
 
             // Save the selected name to localStorage
             saveToLocalStorage(data[picked].label);
