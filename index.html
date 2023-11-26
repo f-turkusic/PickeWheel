@@ -1,46 +1,48 @@
 <head>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('pictures/13.png');
+        }
+    </style>
 </head>
 
-<!-- <div id="chart"></div>
-<div id="question">
-    <h1></h1>
-</div> -->
-
-<section>
-    <button class="show-modal">Show name</button>
-    <div id="chart"></div>
-    <div id="question">
-        <h1></h1>
-    </div>
-    <span class="overlay"></span>
-    <div class="modal-box">
-        <i class="fa-regular fa-circle-check"></i>
-        <h2>Completed</h2>
-        <h3 id="izvucenoIme"></h3>
-        <div class="buttons">
-            <button class="close-btn">Ok, Close</button>
+<body>
+    <section>
+        <button class="show-modal">Show name</button>
+        <div id="chart"></div>
+        <div id="question">
+            <h1></h1>
         </div>
-    </div>
-</section>
+        <span class="overlay"></span>
+        <div class="modal-box">
+            <i class="fa-regular fa-circle-check"></i>
+            <h2>Completed</h2>
+            <h3 id="izvucenoIme"></h3>
+            <div class="buttons">
+                <button class="close-btn">Ok, Close</button>
+            </div>
+        </div>
+    </section>
 
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="script.js"></script>
-<script>
-    const section = document.querySelector("section"),
-        overlay = document.querySelector(".overlay"),
-        showBtn = document.querySelector(".show-modal"),
-        closeBtn = document.querySelector(".close-btn");
-    showBtn.addEventListener("click", () => section.classList.add("active"));
-    overlay.addEventListener("click", () =>
-        section.classList.remove("active")
-    );
-    closeBtn.addEventListener("click", () =>
-        section.classList.remove("active")
-    );
-    closeBtn.addEventListener("click", () =>
-    {
-        buttonClicked = true;
-    });
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="script.js"></script>
+    <script>
+        const section = document.querySelector("section"),
+            overlay = document.querySelector(".overlay"),
+            showBtn = document.querySelector(".show-modal"),
+            closeBtn = document.querySelector(".close-btn");
+        showBtn.addEventListener("click", () => section.classList.add("active"));
+        overlay.addEventListener("click", () =>
+            section.classList.remove("active")
+        );
+        closeBtn.addEventListener("click", () =>
+            section.classList.remove("active")
+        );
+        closeBtn.addEventListener("click", () =>
+        {
+            buttonClicked = true;
+        });
 
-</script>
+    </script>
+</body>
