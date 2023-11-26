@@ -108,9 +108,15 @@ function spin(d)
             d3.select(".slice:nth-child(" + (picked + 1) + ") path")
                 .attr("fill", "#111");
             //populate question
-            d3.select("#question h1")
+            // d3.select("#question h1")
+            //     .text(data[picked].label);
+            // oldrotation = rotation;
+
+            d3.select("h2")
                 .text(data[picked].label);
             oldrotation = rotation;
+
+
 
             /* Get the result value from object "data" */
             console.log(data[picked].label)
